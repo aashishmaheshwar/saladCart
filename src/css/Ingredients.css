@@ -33,7 +33,7 @@
 .ingredients__mainwrapper {
   display: flex;
   justify-content: center;
-  width: 100vw;
+  width: 98vw;
   margin-top: 10vh;
   flex-direction: column;
 }
@@ -44,7 +44,10 @@
 }
 
 .ingredients__mainflexwrapper {
-  display: flex;
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
+  column-gap: 10px;
   justify-content: center;
-  flex-wrap: wrap;
+
+  /* flex-wrap: wrap; */
 }

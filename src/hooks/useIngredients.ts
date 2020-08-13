@@ -10,70 +10,69 @@ export interface Ingredient {
 const OPTIONS: Array<Ingredient> = [
   {
     id: "C2-00",
-    name: "Mustard seeds",
-    price: 80,
-    image:
-      "http://img1.exportersindia.com/product_images/bc-small/dir_54/1611062/mustard-seeds-1208829.jpg",
+    name: "Lettuce",
+    price: 30,
+    image: "/images/Lettuce.jpg",
   },
   {
     id: "C2-01",
-    name: "Pepper",
-    price: 120,
-    image:
-      "http://img1.exportersindia.com/product_images/bc-small/dir_23/674664/black-pepper-seed-1680115.jpg",
+    name: "Brocolli",
+    price: 50,
+    image: "/images/Brocolli.jpg",
   },
   {
     id: "C2-02",
-    name: "Cumin seeds/jeera",
-    price: 180,
-    image: "http://puritytest.in/public/img/product_images/jeera1_1_1.jpg",
+    name: "Onion",
+    price: 10,
+    image: "/images/Onions.jpg",
   },
   {
     id: "C2-03",
-    name: "Poppy seeds/Khus khus",
-    price: 180,
-    image:
-      "http://img1.exportersindia.com/product_images/bc-small/dir_113/3382222/2-khas-khas-poppy-seeds-2203115.jpg",
+    name: "Tomato",
+    price: 10,
+    image: "/images/Tomato.jpg",
   },
   {
     id: "C2-04",
-    name: "Coriander seeds/Dhania",
-    price: 180,
-    image:
-      "http://img1.exportersindia.com/product_images/bc-small/dir_105/3122483/watermark/eagle-coriander-seeds-1201536.jpg",
+    name: "Coriander",
+    price: 15,
+    image: "/images/Coriander.jpg",
   },
   {
     id: "C2-05",
-    name: "Fennel seeds",
-    price: 180,
-    image:
-      "http://img1.exportersindia.com/product_images/bc-small/dir_115/3440565/fennel-seeds-1693027.jpg",
+    name: "Zuccini",
+    price: 40,
+    image: "/images/Zuccini.jpg",
   },
   {
     id: "C2-06",
-    name: "Dry ginger piece or powder",
-    price: 180,
-    image:
-      "http://img1.exportersindia.com/product_images/bc-small/dir_62/1835594/ginger-powder-677521.jpg",
+    name: "Cucumber",
+    price: 15,
+    image: "/images/Cucumber.jpg",
   },
   {
     id: "C2-07",
-    name: "Black or white sesame seeds",
-    price: 180,
-    image:
-      "http://img1.exportersindia.com/product_images/bc-small/dir_105/3144460/sesame-seeds-1947019.jpg",
+    name: "Olives",
+    price: 40,
+    image: "/images/Olives.jpg",
   },
   {
     id: "C2-08",
-    name: "Ajwain",
-    price: 180,
-    image: "https://4.imimg.com/data4/HJ/KJ/MY-22994316/ajwain-250x250.jpeg",
+    name: "Jalapeno",
+    price: 45,
+    image: "/images/Jalapeno.jpg",
   },
   {
     id: "C2-09",
-    name: "Hing/Asafetida",
-    price: 180,
-    image: "http://3.imimg.com/data3/RG/SE/MY-16380257/4-250x250.jpg",
+    name: "Mushroom",
+    price: 50,
+    image: "/images/Mushroom.jpg",
+  },
+  {
+    id: "C2-10",
+    name: "Bell Pepper",
+    price: 30,
+    image: "/images/BellPepper.jpg",
   },
 ];
 

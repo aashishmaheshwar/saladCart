@@ -1,7 +1,7 @@
-import React, { useState, useEffect } from "react";
-import { FaPlusCircle, FaMinusCircle, FaShoppingCart } from "react-icons/fa";
+import React, { useEffect } from "react";
+import { FaPlusCircle, FaMinusCircle } from "react-icons/fa";
 import { useIngredients, Ingredient } from "../hooks/useIngredients";
-import { connect, useDispatch, useSelector } from "react-redux";
+import { useDispatch, useSelector } from "react-redux";
 import { RouteComponentProps } from "react-router-dom";
 import "./../css/Ingredients.css";
 
@@ -88,7 +88,7 @@ const Ingredients: React.FC<RouteComponentProps> = ({ history }) => {
     return (
       <>
         {(options as Array<Ingredient>).map((option) => {
-          const { id, name, price, image } = option;
+          const { id, name, image } = option;
           return (
             <div key={id} className="ingredient--item__mainwrapper">
               <div>
@@ -100,6 +100,8 @@ const Ingredients: React.FC<RouteComponentProps> = ({ history }) => {
                     width: "150px",
                     marginBottom: "10px",
                     borderRadius: "10px",
+                    height: "150px",
+                    border: "1px solid beige",
                   }}
                   title={name}
                 />
@@ -120,16 +122,6 @@ const Ingredients: React.FC<RouteComponentProps> = ({ history }) => {
       {options && (options as Array<Ingredient>).length > 0 ? (
         <section className="ingredients__mainwrapper">
           <h1 className="ingredients__header">Ingredients</h1>
-          {/* <div>
-            <button
-              className="btn btn-primary"
-              disabled={!enableCheckout}
-              onClick={checkout}
-            >
-              <FaShoppingCart />
-              &nbsp;&nbsp;Proceed to checkout
-            </button>
-          </div> */}
           <div className="ingredients__mainflexwrapper">
             {buildAllIngredients()}
           </div>
