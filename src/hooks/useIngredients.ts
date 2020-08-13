@@ -7,7 +7,7 @@ export interface Ingredient {
   image: string;
 }
 
-const options: Array<Ingredient> = [
+const OPTIONS: Array<Ingredient> = [
   {
     id: "C2-00",
     name: "Mustard seeds",
@@ -77,21 +77,37 @@ const options: Array<Ingredient> = [
   },
 ];
 
-const initialSelectedObj = options.reduce(
-  (acc, option) => ({
-    ...acc,
-    [option.name]: 0,
-  }),
-  {}
-);
-
-export function useIngredients(defaultSelectedItems = null) {
-  const [selectedItems, setSelectedItems] = useState(
-    defaultSelectedItems === null
-      ? (initialSelectedObj as any)
-      : defaultSelectedItems
-  );
+export function useIngredients(defaultSelectedItems: Object | null = null) {
+  const [selectedItems, setSelectedItems] = useState({} as Object);
   const [enableCheckout, setEnableCheckout] = useState(false);
+  const [options, setOptions] = useState([] as Array<Ingredient>);
+
+  useEffect(() => {
+    const mockAPIPromise = new Promise((resolve, reject) => {
+      setTimeout(() => {
+        resolve(OPTIONS);
+      }, 700);
+    });
+    mockAPIPromise
+      .then((response) => {
+        setOptions(() => response as Array<Ingredient>);
+        const initialSelectedObj = (response as Array<Ingredient>).reduce(
+          (acc, option) => ({
+            ...acc,
+            [option.name]: 0,
+          }),
+          {}
+        );
+        setSelectedItems(() => {
+          return defaultSelectedItems === null
+            ? (initialSelectedObj as any)
+            : { ...initialSelectedObj, ...(defaultSelectedItems as Object) };
+        });
+      })
+      .catch(() => {
+        alert("Failed to fetch Ingredients. Try again later.");
+      });
+  }, []);
 
   useEffect(() => {
     if (
@@ -126,5 +142,5 @@ export function useIngredients(defaultSelectedItems = null) {
     }
   };
 
-  return [selectedItems, updateIngredientCount, options, enableCheckout];
+  return [updateIngredientCount, selectedItems, options, enableCheckout];
 }

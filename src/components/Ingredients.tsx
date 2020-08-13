@@ -9,15 +9,15 @@ const Ingredients: React.FC<RouteComponentProps> = ({ history }) => {
     (state) => (state as any).selectedItems
   ); // when we hit back button on checkout
   const [
-    selectedItems,
     updateIngredientCount,
+    selectedItems,
     options,
     enableCheckout,
   ] = useIngredients(defaultSelectedItems);
   const dispatch = useDispatch();
 
   const handleInputValueChange = ({ target: { name, value } }: any) => {
-    updateIngredientCount(name, value);
+    (updateIngredientCount as any)(name, value);
   };
 
   const checkout = () => {
@@ -45,20 +45,30 @@ const Ingredients: React.FC<RouteComponentProps> = ({ history }) => {
         >
           <button
             className="btn btn-link btn-sm"
-            onClick={() => updateIngredientCount(name, selectedItems[name] + 1)}
+            onClick={() =>
+              (updateIngredientCount as any)(
+                name,
+                (selectedItems as any)[name] + 1
+              )
+            }
           >
             <FaPlusCircle />
           </button>
           <input
             type="text"
             name={name}
-            value={selectedItems[name]}
+            value={(selectedItems as any)[name]}
             onChange={handleInputValueChange}
             style={{ width: "50px", margin: "0 0.75rem" }}
           />
           <button
             className="btn btn-link btn-sm"
-            onClick={() => updateIngredientCount(name, selectedItems[name] - 1)}
+            onClick={() =>
+              (updateIngredientCount as any)(
+                name,
+                (selectedItems as any)[name] - 1
+              )
+            }
           >
             <FaMinusCircle />
           </button>
@@ -70,7 +80,7 @@ const Ingredients: React.FC<RouteComponentProps> = ({ history }) => {
   const buildAllIngredients = () => {
     return (
       <>
-        {options.map((option: Ingredient) => {
+        {(options as Array<Ingredient>).map((option) => {
           const { id, name, price, image } = option;
           return (
             <div
@@ -108,36 +118,42 @@ const Ingredients: React.FC<RouteComponentProps> = ({ history }) => {
   };
 
   return (
-    <section
-      style={{
-        display: "flex",
-        justifyContent: "center",
-        width: "100vw",
-        marginTop: "10vh",
-        flexDirection: "column",
-      }}
-    >
-      <h1 style={{ width: "100%", marginBottom: "5vh" }}>Ingredients</h1>
-      <div style={{ marginBottom: "2vh" }}>
-        <button
-          className="btn btn-primary"
-          disabled={!enableCheckout}
-          onClick={checkout}
+    <>
+      {options && (options as Array<Ingredient>).length > 0 ? (
+        <section
+          style={{
+            display: "flex",
+            justifyContent: "center",
+            width: "100vw",
+            marginTop: "10vh",
+            flexDirection: "column",
+          }}
         >
-          <FaShoppingCart />
-          &nbsp;&nbsp;Proceed to checkout
-        </button>
-      </div>
-      <div
-        style={{
-          display: "flex",
-          justifyContent: "center",
-          flexWrap: "wrap",
-        }}
-      >
-        {buildAllIngredients()}
-      </div>
-    </section>
+          <h1 style={{ width: "100%", marginBottom: "5vh" }}>Ingredients</h1>
+          <div style={{ marginBottom: "2vh" }}>
+            <button
+              className="btn btn-primary"
+              disabled={!enableCheckout}
+              onClick={checkout}
+            >
+              <FaShoppingCart />
+              &nbsp;&nbsp;Proceed to checkout
+            </button>
+          </div>
+          <div
+            style={{
+              display: "flex",
+              justifyContent: "center",
+              flexWrap: "wrap",
+            }}
+          >
+            {buildAllIngredients()}
+          </div>
+        </section>
+      ) : (
+        <span>Loading...</span>
+      )}
+    </>
   );
 };
 

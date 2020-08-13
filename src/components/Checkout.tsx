@@ -12,7 +12,7 @@ import { RouteComponentProps } from "react-router-dom";
 import CartSummary from "./CartSummary";
 import Modal from "./Modal";
 
-const EMAIL_PATTERN = /^[a-z]?[a-z0-9._%+-]+@[a-z]?[a-z0-9.-]+\.[a-z]{2,3}$/i;
+const EMAIL_PATTERN = /^[a-z]+[a-z0-9._%+-]+@[a-z]+[a-z0-9.-]+\.[a-z]{2,3}$/i;
 
 const Checkout: React.FC<RouteComponentProps> = ({ history }) => {
   const { options, selectedItems } = useSelector((state) => state) as any;
@@ -94,7 +94,7 @@ const Checkout: React.FC<RouteComponentProps> = ({ history }) => {
         <br />
         <form onSubmit={handleSubmit}>
           <div className="row justify-content-center">
-            <label className="col-sm-4" style={{ textAlign: "right" }}>
+            <label className="col-sm-2" style={{ textAlign: "right" }}>
               Name*
             </label>
             <input
@@ -102,7 +102,7 @@ const Checkout: React.FC<RouteComponentProps> = ({ history }) => {
               type="text"
               name="name"
               required
-              className="col-sm-3 col-10 form-control"
+              className="col-sm-4 col-10 form-control"
               aria-label="Enter the name"
               value={orderDetails.name}
               onChange={handleFormValueChange}
@@ -111,7 +111,7 @@ const Checkout: React.FC<RouteComponentProps> = ({ history }) => {
           </div>
           <br />
           <div className="row justify-content-center">
-            <label className="col-sm-4" style={{ textAlign: "right" }}>
+            <label className="col-sm-2" style={{ textAlign: "right" }}>
               Email*
             </label>
             <input
@@ -120,8 +120,8 @@ const Checkout: React.FC<RouteComponentProps> = ({ history }) => {
               name="email"
               aria-label="Enter the email"
               required
-              className="col-sm-3 col-10 form-control"
-              pattern={`^[a-zA-Z]?[a-zA-Z0-9._%+-]+@[a-zA-Z]?[a-zA-Z0-9.-]+\.[a-zA-Z]{2,3}$`}
+              className="col-sm-4 col-10 form-control"
+              pattern={`^[a-zA-Z]+[a-zA-Z0-9._%+-]+@[a-zA-Z]+[a-zA-Z0-9.-]+\.[a-zA-Z]{2,3}$`}
               value={orderDetails.email}
               onChange={handleFormValueChange}
               // onBlur={checkValidity}
@@ -129,12 +129,12 @@ const Checkout: React.FC<RouteComponentProps> = ({ history }) => {
           </div>
           <br />
           <div className="row justify-content-center">
-            <label className="col-sm-4" style={{ textAlign: "right" }}>
+            <label className="col-sm-2" style={{ textAlign: "right" }}>
               Additional Notes
             </label>
             <textarea
               name="notes"
-              className="col-sm-3 col-10 form-control"
+              className="col-sm-4 col-10 form-control"
               aria-label="Enter additional notes"
               value={orderDetails.notes}
               onChange={handleFormValueChange}
@@ -142,9 +142,9 @@ const Checkout: React.FC<RouteComponentProps> = ({ history }) => {
           </div>
           <br />
           <div className="row justify-content-center">
-            <div className="col-sm-4"></div>
+            <div className="col-sm-2"></div>
             <div
-              className="col-sm-3"
+              className="col-sm-4"
               style={{
                 display: "flex",
                 justifyContent: "flex-start",
@@ -171,10 +171,14 @@ const Checkout: React.FC<RouteComponentProps> = ({ history }) => {
       <h1>Checkout</h1>
       <br />
       <br />
-      {options && (
-        <CartSummary options={options} selectedItems={selectedItems} />
-      )}
-      {buildOrderDetailsForm()}
+      <div className="row">
+        <div className="col-sm-6 col-10">
+          {options && (
+            <CartSummary options={options} selectedItems={selectedItems} />
+          )}
+        </div>
+        <div className="col-sm-6 col-10">{buildOrderDetailsForm()}</div>
+      </div>
     </section>
   );
 };
