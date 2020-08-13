@@ -14,7 +14,28 @@
 }
 
 @media (max-width: 576px) {
+  .checkout__mainwrapper {
+    margin-top: 7vw;
+  }
   .checkout--field__label {
     text-align: left;
+  }
+}
+
+@media (max-width: 400px) {
+  .checkout__mainwrapper {
+    margin-top: 9vw;
+  }
+}
+
+@media (max-width: 300px) {
+  .checkout__mainwrapper {
+    margin-top: 11vw;
+  }
+}
+
+@media (max-width: 200px) {
+  .checkout__mainwrapper {
+    margin-top: 13vw;
   }
 }
