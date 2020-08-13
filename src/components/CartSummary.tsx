@@ -26,6 +26,7 @@ const CartSummary: React.FC<{
   return (
     <div>
       <h4>Order Summary</h4>
+      <br />
       <section className="row justify-content-center">
         <table className="col-sm-7 table table-striped">
           <thead>
@@ -47,6 +48,23 @@ const CartSummary: React.FC<{
                 <td>{item.totalPrice}</td>
               </tr>
             ))}
+            <tr key={`Grand Total`}>
+              <td></td>
+              <td></td>
+              <td></td>
+              <td>
+                <b>Grand Total: </b>
+              </td>
+              <td>
+                <b>
+                  {tableData.reduce(
+                    (acc: number, { totalPrice }: { totalPrice: number }) =>
+                      acc + totalPrice,
+                    0
+                  )}
+                </b>
+              </td>
+            </tr>
           </tbody>
         </table>
       </section>

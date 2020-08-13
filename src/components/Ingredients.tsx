@@ -1,16 +1,19 @@
 import React, { useState, useEffect } from "react";
 import { FaPlusCircle, FaMinusCircle, FaShoppingCart } from "react-icons/fa";
 import { useIngredients, Ingredient } from "../hooks/useIngredients";
-import { connect, useDispatch } from "react-redux";
+import { connect, useDispatch, useSelector } from "react-redux";
 import { RouteComponentProps } from "react-router-dom";
 
 const Ingredients: React.FC<RouteComponentProps> = ({ history }) => {
+  const defaultSelectedItems = useSelector(
+    (state) => (state as any).selectedItems
+  ); // when we hit back button on checkout
   const [
     selectedItems,
     updateIngredientCount,
     options,
     enableCheckout,
-  ] = useIngredients();
+  ] = useIngredients(defaultSelectedItems);
   const dispatch = useDispatch();
 
   const handleInputValueChange = ({ target: { name, value } }: any) => {

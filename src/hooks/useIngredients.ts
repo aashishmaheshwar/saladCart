@@ -85,8 +85,12 @@ const initialSelectedObj = options.reduce(
   {}
 );
 
-export function useIngredients() {
-  const [selectedItems, setSelectedItems] = useState(initialSelectedObj as any);
+export function useIngredients(defaultSelectedItems = null) {
+  const [selectedItems, setSelectedItems] = useState(
+    defaultSelectedItems === null
+      ? (initialSelectedObj as any)
+      : defaultSelectedItems
+  );
   const [enableCheckout, setEnableCheckout] = useState(false);
 
   useEffect(() => {
