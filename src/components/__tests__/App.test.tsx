@@ -1,12 +1,6 @@
 import React from "react";
 import App from "../../App";
-import {
-  render,
-  getByText,
-  fireEvent,
-  screen,
-  waitForElement,
-} from "../../utils/test-utils";
+import { render, getByText, fireEvent, screen } from "../../utils/test-utils";
 
 // const mockFn = jest.fn();
 
@@ -31,10 +25,13 @@ describe("App", () => {
     fireEvent.click(screen.getByText("Order now"));
     jest.advanceTimersByTime(2000);
     expect(screen.getByText("Loading...")).toBeInTheDocument();
+    // await act(() => {
+    //   sleep(2000);
+    // });
     // const lazyElement = await waitForElement(() =>
     //   screen.getByText("Ingredients")
     // );
-    // expect(lazyElement).toBeInTheDocument();
+    // expect(screen.getByText("Ingredients")).toBeInTheDocument();
   });
 });
 
