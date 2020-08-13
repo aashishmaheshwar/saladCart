@@ -1,0 +1,11 @@
+.home__mainwrapper {
+  display: flex;
+  justify-content: center;
+  width: 100vw;
+  flex-direction: column;
+  margin-top: 10vh;
+}
+
+.home--orderbtn__wrapper {
+  margin-top: 2vh;
+}

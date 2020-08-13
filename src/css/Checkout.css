@@ -1,0 +1,15 @@
+.checkout--field__label {
+  text-align: right;
+}
+
+.checkout--orderBtn__wrapper {
+  display: flex;
+  justify-content: flex-start;
+  padding-left: 0;
+}
+
+@media (max-width: 576px) {
+  .checkout--field__label {
+    text-align: left;
+  }
+}

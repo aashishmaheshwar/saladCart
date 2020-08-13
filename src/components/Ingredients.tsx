@@ -3,11 +3,12 @@ import { FaPlusCircle, FaMinusCircle, FaShoppingCart } from "react-icons/fa";
 import { useIngredients, Ingredient } from "../hooks/useIngredients";
 import { connect, useDispatch, useSelector } from "react-redux";
 import { RouteComponentProps } from "react-router-dom";
+import "./../css/Ingredients.css";
 
 const Ingredients: React.FC<RouteComponentProps> = ({ history }) => {
   const defaultSelectedItems = useSelector(
     (state) => (state as any).selectedItems
-  ); // when we hit back button on checkout
+  ); // when we hit back button from checkout page, we would need the cart intact
   const [
     updateIngredientCount,
     selectedItems,
@@ -33,16 +34,9 @@ const Ingredients: React.FC<RouteComponentProps> = ({ history }) => {
 
   const buildItemDetailView = ({ name, price }: Ingredient) => {
     return (
-      <section style={{ width: "150px", background: "#f4f3f2" }}>
+      <section className="ingredient--itemdetail__mainwrapper">
         <div>MRP: Rs {price}</div>
-        <div
-          style={{
-            display: "flex",
-            justifyContent: "center",
-            alignItems: "center",
-            paddingBottom: "10px",
-          }}
-        >
+        <div className="ingredient--itemdetail__countwrapper">
           <button
             className="btn btn-link btn-sm"
             onClick={() =>
@@ -59,7 +53,7 @@ const Ingredients: React.FC<RouteComponentProps> = ({ history }) => {
             name={name}
             value={(selectedItems as any)[name]}
             onChange={handleInputValueChange}
-            style={{ width: "50px", margin: "0 0.75rem" }}
+            className="ingredient--itemdetail__input"
           />
           <button
             className="btn btn-link btn-sm"
@@ -83,21 +77,12 @@ const Ingredients: React.FC<RouteComponentProps> = ({ history }) => {
         {(options as Array<Ingredient>).map((option) => {
           const { id, name, price, image } = option;
           return (
-            <div
-              key={id}
-              style={{
-                width: "300px",
-                height: "300px",
-                display: "flex",
-                flexDirection: "column",
-                // padding: "1vw",
-                alignItems: "center",
-              }}
-            >
+            <div key={id} className="ingredient--item__mainwrapper">
               <div>
                 <img
                   src={image}
                   alt={name}
+                  // className="ingredient--item__image"
                   style={{
                     width: "150px",
                     marginBottom: "10px",
@@ -120,17 +105,9 @@ const Ingredients: React.FC<RouteComponentProps> = ({ history }) => {
   return (
     <>
       {options && (options as Array<Ingredient>).length > 0 ? (
-        <section
-          style={{
-            display: "flex",
-            justifyContent: "center",
-            width: "100vw",
-            marginTop: "10vh",
-            flexDirection: "column",
-          }}
-        >
-          <h1 style={{ width: "100%", marginBottom: "5vh" }}>Ingredients</h1>
-          <div style={{ marginBottom: "2vh" }}>
+        <section className="ingredients__mainwrapper">
+          <h1 className="ingredients__header">Ingredients</h1>
+          <div>
             <button
               className="btn btn-primary"
               disabled={!enableCheckout}
@@ -140,13 +117,7 @@ const Ingredients: React.FC<RouteComponentProps> = ({ history }) => {
               &nbsp;&nbsp;Proceed to checkout
             </button>
           </div>
-          <div
-            style={{
-              display: "flex",
-              justifyContent: "center",
-              flexWrap: "wrap",
-            }}
-          >
+          <div className="ingredients__mainflexwrapper">
             {buildAllIngredients()}
           </div>
         </section>

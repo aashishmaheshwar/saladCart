@@ -11,6 +11,7 @@ import { useSelector, useDispatch } from "react-redux";
 import { RouteComponentProps } from "react-router-dom";
 import CartSummary from "./CartSummary";
 import Modal from "./Modal";
+import "./../css/Checkout.css";
 
 const EMAIL_PATTERN = /^[a-z]+[a-z0-9._%+-]+@[a-z]+[a-z0-9.-]+\.[a-z]{2,3}$/i;
 
@@ -69,32 +70,38 @@ const Checkout: React.FC<RouteComponentProps> = ({ history }) => {
   //   // }
   // };
 
+  const buildModal = () => {
+    return (
+      <Modal open={ordered} onClose={goToHome}>
+        {options && (
+          <CartSummary options={options} selectedItems={selectedItems} />
+        )}
+        <br />
+        <h4>Customer Details</h4>
+        <ul style={{ listStyle: "none" }}>
+          {Object.entries(orderDetails).map(([key, value]) => {
+            return (
+              <li key={key}>
+                <span style={{ width: "10%" }}>{key}</span> - <b>{value}</b>
+              </li>
+            );
+          })}
+        </ul>
+        <br />
+        <b>Thank You!! Delivery is on its way :)</b>
+      </Modal>
+    );
+  };
+
   const buildOrderDetailsForm = () => {
     return (
       <>
-        <Modal open={ordered} onClose={goToHome}>
-          {options && (
-            <CartSummary options={options} selectedItems={selectedItems} />
-          )}
-          <br />
-          <h4>Customer Details</h4>
-          <ul style={{ listStyle: "none" }}>
-            {Object.entries(orderDetails).map(([key, value]) => {
-              return (
-                <li key={key}>
-                  <span style={{ width: "10%" }}>{key}</span> - <b>{value}</b>
-                </li>
-              );
-            })}
-          </ul>
-          <br />
-          <b>Thank You!! Delivery is on its way :)</b>
-        </Modal>
+        {buildModal()}
         <h4>Contact Details</h4>
         <br />
         <form onSubmit={handleSubmit}>
           <div className="row justify-content-center">
-            <label className="col-sm-2" style={{ textAlign: "right" }}>
+            <label className="col-sm-2 col-10 checkout--field__label">
               Name*
             </label>
             <input
@@ -111,7 +118,7 @@ const Checkout: React.FC<RouteComponentProps> = ({ history }) => {
           </div>
           <br />
           <div className="row justify-content-center">
-            <label className="col-sm-2" style={{ textAlign: "right" }}>
+            <label className="col-sm-2 col-10 checkout--field__label">
               Email*
             </label>
             <input
@@ -129,7 +136,7 @@ const Checkout: React.FC<RouteComponentProps> = ({ history }) => {
           </div>
           <br />
           <div className="row justify-content-center">
-            <label className="col-sm-2" style={{ textAlign: "right" }}>
+            <label className="col-sm-2 col-10 checkout--field__label">
               Additional Notes
             </label>
             <textarea
@@ -142,16 +149,10 @@ const Checkout: React.FC<RouteComponentProps> = ({ history }) => {
           </div>
           <br />
           <div className="row justify-content-center">
-            <div className="col-sm-2"></div>
-            <div
-              className="col-sm-4"
-              style={{
-                display: "flex",
-                justifyContent: "flex-start",
-                paddingLeft: 0,
-              }}
-            >
+            <div className="col-sm-2 col-10"></div>
+            <div className="col-sm-4 col-10 checkout--orderBtn__wrapper">
               <button
+                className="btn btn-primary"
                 type="submit"
                 disabled={
                   !orderDetails.name || !EMAIL_PATTERN.test(orderDetails.email)
@@ -172,12 +173,12 @@ const Checkout: React.FC<RouteComponentProps> = ({ history }) => {
       <br />
       <br />
       <div className="row">
-        <div className="col-sm-6 col-10">
+        <div className="col-md-6 col-12">
           {options && (
             <CartSummary options={options} selectedItems={selectedItems} />
           )}
         </div>
-        <div className="col-sm-6 col-10">{buildOrderDetailsForm()}</div>
+        <div className="col-md-6 col-12">{buildOrderDetailsForm()}</div>
       </div>
     </section>
   );
