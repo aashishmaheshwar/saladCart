@@ -8,6 +8,11 @@
   padding-left: 0;
 }
 
+.checkout__mainwrapper {
+  width: 100vw;
+  margin-top: 5vw;
+}
+
 @media (max-width: 576px) {
   .checkout--field__label {
     text-align: left;

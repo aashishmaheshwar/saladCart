@@ -1,5 +1,16 @@
 .mainnav__checkoutbtn {
   position: absolute;
   right: 5px;
-  bottom: 5px;
+  bottom: 25px;
+}
+
+.mainnav__title {
+  display: inline-block;
+}
+
+.mainnav__bottompadding {
+  height: 30px;
+  opacity: 1;
+  background: white;
+  z-index: 100;
 }

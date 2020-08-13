@@ -12,19 +12,22 @@ const MainNavigation = () => {
   };
 
   return (
-    <nav className="App-Header__nav">
-      Store
-      {(enableCheckout === true || enableCheckout === false) && (
-        <button
-          className="btn btn-primary mainnav__checkoutbtn"
-          disabled={!enableCheckout}
-          onClick={checkout}
-        >
-          <FaShoppingCart />
-          &nbsp;&nbsp;Proceed to checkout
-        </button>
-      )}
-    </nav>
+    <div className="App-Header__container">
+      <nav className="App-Header__nav">
+        <h3 className="mainnav__title">The Salad Store</h3>
+        {(enableCheckout === true || enableCheckout === false) && (
+          <button
+            className="btn btn-primary mainnav__checkoutbtn"
+            disabled={!enableCheckout}
+            onClick={checkout}
+          >
+            <FaShoppingCart />
+            &nbsp;&nbsp;Proceed to checkout
+          </button>
+        )}
+      </nav>
+      <div className="mainnav__bottompadding"></div>
+    </div>
   );
 };
 

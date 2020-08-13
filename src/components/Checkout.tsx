@@ -168,7 +168,7 @@ const Checkout: React.FC<RouteComponentProps> = ({ history }) => {
   };
 
   return (
-    <section style={{ width: "100vw" }}>
+    <section className="checkout__mainwrapper">
       <h1>Checkout</h1>
       <br />
       <br />
