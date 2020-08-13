@@ -9,6 +9,9 @@ const Ingredients: React.FC<RouteComponentProps> = ({ history }) => {
   const defaultSelectedItems = useSelector(
     (state) => (state as any).selectedItems
   ); // when we hit back button from checkout page, we would need the cart intact
+  const checkoutTrigger = useSelector(
+    (state) => (state as any).checkoutTrigger
+  );
   const [
     updateIngredientCount,
     selectedItems,
@@ -16,6 +19,16 @@ const Ingredients: React.FC<RouteComponentProps> = ({ history }) => {
     enableCheckout,
   ] = useIngredients(defaultSelectedItems);
   const dispatch = useDispatch();
+
+  useEffect(() => {
+    if (checkoutTrigger) {
+      checkout();
+    }
+  }, [checkoutTrigger]);
+
+  useEffect(() => {
+    dispatch({ type: "ENABLE_CHECKOUT", payload: { enableCheckout } });
+  }, [enableCheckout]);
 
   const handleInputValueChange = ({ target: { name, value } }: any) => {
     (updateIngredientCount as any)(name, value);
@@ -51,7 +64,7 @@ const Ingredients: React.FC<RouteComponentProps> = ({ history }) => {
           <input
             type="text"
             name={name}
-            value={(selectedItems as any)[name]}
+            value={(selectedItems as any)[name] || ""}
             onChange={handleInputValueChange}
             className="ingredient--itemdetail__input"
           />
@@ -107,7 +120,7 @@ const Ingredients: React.FC<RouteComponentProps> = ({ history }) => {
       {options && (options as Array<Ingredient>).length > 0 ? (
         <section className="ingredients__mainwrapper">
           <h1 className="ingredients__header">Ingredients</h1>
-          <div>
+          {/* <div>
             <button
               className="btn btn-primary"
               disabled={!enableCheckout}
@@ -116,7 +129,7 @@ const Ingredients: React.FC<RouteComponentProps> = ({ history }) => {
               <FaShoppingCart />
               &nbsp;&nbsp;Proceed to checkout
             </button>
-          </div>
+          </div> */}
           <div className="ingredients__mainflexwrapper">
             {buildAllIngredients()}
           </div>

@@ -3,6 +3,7 @@ import React, { Suspense } from "react";
 import "./App.css";
 import { BrowserRouter as Router, Switch, Route } from "react-router-dom";
 import Home from "./components/Home";
+import MainNavigation from "./components/MainNavigation";
 
 const Ingredients = React.lazy(() => import("./components/Ingredients"));
 const Checkout = React.lazy(() => import("./components/Checkout"));
@@ -12,7 +13,8 @@ function App() {
     <Router>
       <div className="App">
         <header>
-          <nav className="App-Header__nav">Store</nav>
+          <MainNavigation />
+          {/* <nav className="App-Header__nav">Store</nav> */}
         </header>
         <main className="App__content">
           <Suspense fallback={<span>Loading...</span>}>
