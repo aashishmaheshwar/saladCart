@@ -43,7 +43,6 @@ const Checkout: React.FC<RouteComponentProps> = ({ history }) => {
 
   const handleSubmit = (e: FormEvent) => {
     e.preventDefault();
-    console.dir("submit event is ", e);
     setOrdered(true);
   };
 
