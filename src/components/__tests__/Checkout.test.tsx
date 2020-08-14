@@ -9,6 +9,7 @@ import cartReducer from "../../reducers/cart-reducer";
 import { Provider } from "react-redux";
 import { render as rtlRender, getByText } from "@testing-library/react";
 import { fireEvent } from "@testing-library/dom";
+import ReactDOM from "react-dom";
 
 const OPTIONS = [
   {
@@ -108,6 +109,38 @@ describe("Checkout", () => {
       fireEvent.blur(emailInput as any);
       expect(emailInput?.classList.contains("border-danger")).toBeFalsy();
       expect(emailInput?.nextSibling?.textContent).toBe("");
+    });
+  });
+
+  describe("handleSubmission", () => {
+    let render,
+      container,
+      baseElement: HTMLElement,
+      nameInput: HTMLInputElement | null,
+      emailInput: HTMLInputElement | null,
+      submitBtn: HTMLButtonElement | null;
+    beforeEach(() => {
+      render = getRender(initialState);
+      const rendered = render(<Checkout {...routeComponentPropsMock} />);
+      container = rendered.container;
+      baseElement = rendered.baseElement;
+      nameInput = container.querySelector('input[type="text"][name="name"]');
+      emailInput = container.querySelector('input[type="email"][name="email"]');
+      submitBtn = container.querySelector('button[type="submit"]');
+      fireEvent.change(nameInput as HTMLElement, {
+        target: { value: "aashish" },
+      });
+      fireEvent.change(emailInput as HTMLElement, {
+        target: { value: "aash@gmail.com" },
+      });
+    });
+
+    it("clicking on order btn opens the summary popup", () => {
+      spyOn(ReactDOM, "createPortal").and.returnValue(
+        <span>Summary Popup</span>
+      );
+      fireEvent.click(submitBtn as HTMLButtonElement);
+      expect(ReactDOM.createPortal).toHaveBeenCalled();
     });
   });
 });
