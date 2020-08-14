@@ -24,8 +24,8 @@ const Checkout: React.FC<RouteComponentProps> = ({ history }) => {
     notes: "",
   });
   const dispatch = useDispatch();
-  // const nameRef: RefObject<HTMLInputElement> = useRef() as any;
-  // const emailRef: RefObject<HTMLInputElement> = useRef() as any;
+  const nameRef: RefObject<HTMLInputElement> = useRef() as any;
+  const emailRef: RefObject<HTMLInputElement> = useRef() as any;
   // const formRef: RefObject<HTMLFormElement> = useRef() as any;
 
   useEffect(() => {
@@ -51,6 +51,7 @@ const Checkout: React.FC<RouteComponentProps> = ({ history }) => {
     const { name, value } = e.target as any;
     if ((e.target as any).validity.valid) {
       (e.target as any).classList.remove("border", "border-danger");
+      removeErrorMessage(name);
     }
     setOrderDetails((oldState) => ({
       ...oldState,
@@ -58,22 +59,54 @@ const Checkout: React.FC<RouteComponentProps> = ({ history }) => {
     }));
   };
 
+  const removeErrorMessage = (name: string) => {
+    switch (name) {
+      case "name": {
+        if (nameRef.current) {
+          nameRef.current.textContent = "";
+        }
+        break;
+      }
+      case "email": {
+        if (emailRef.current) {
+          emailRef.current.textContent = "";
+        }
+        break;
+      }
+    }
+  };
+
+  const displayErrorMessage = (
+    name: string,
+    e: FocusEvent<HTMLInputElement>
+  ) => {
+    switch (name) {
+      case "name": {
+        if (nameRef.current) {
+          nameRef.current.textContent = "Name is required";
+        }
+        break;
+      }
+      case "email": {
+        if (emailRef.current) {
+          if (e.target.value === "")
+            emailRef.current.textContent = "Email is required";
+          else emailRef.current.textContent = "Email format is invalid";
+        }
+        break;
+      }
+    }
+  };
+
   const checkValidity = (e: FocusEvent<HTMLInputElement>) => {
     const { name } = e.target as any;
     if (!e.target.validity.valid) {
       e.target.classList.add("border", "border-danger");
+      displayErrorMessage(name, e);
     } else {
       e.target.classList.remove("border", "border-danger");
+      removeErrorMessage(name);
     }
-    // formRef.current?.checkValidity();
-    // if (name === "email") {
-    //   // emailRef.current?.checkValidity();
-    //   if (!emailRef.current?.validity.valid)
-    //     emailRef.current?.setCustomValidity("Enter a valid email address");
-    // } else {
-    //   if (!emailRef.current?.validity.valid)
-    //     nameRef.current?.setCustomValidity("Name cannot be left blank");
-    // }
   };
 
   const buildModal = () => {
@@ -107,7 +140,7 @@ const Checkout: React.FC<RouteComponentProps> = ({ history }) => {
         <br />
         <form onSubmit={handleSubmit}>
           <div className="row justify-content-center">
-            <label className="col-sm-2 col-10 checkout--field__label">
+            <label className="col-sm-4 col-10 checkout--field__label">
               Name<span className="checkout__required">*</span>
             </label>
             <input
@@ -121,10 +154,14 @@ const Checkout: React.FC<RouteComponentProps> = ({ history }) => {
               onChange={handleFormValueChange}
               onBlur={checkValidity}
             />
+            <div
+              ref={nameRef}
+              className="col-sm-3 col-10 checkout--field__error"
+            ></div>
           </div>
           <br />
           <div className="row justify-content-center">
-            <label className="col-sm-2 col-10 checkout--field__label">
+            <label className="col-sm-4 col-10 checkout--field__label">
               Email<span className="checkout__required">*</span>
             </label>
             <input
@@ -139,10 +176,14 @@ const Checkout: React.FC<RouteComponentProps> = ({ history }) => {
               onChange={handleFormValueChange}
               onBlur={checkValidity}
             />
+            <div
+              ref={emailRef}
+              className="col-sm-3 col-10 checkout--field__error"
+            ></div>
           </div>
           <br />
           <div className="row justify-content-center">
-            <label className="col-sm-2 col-10 checkout--field__label">
+            <label className="col-sm-4 col-10 checkout--field__label">
               Additional Notes
             </label>
             <textarea
@@ -152,10 +193,11 @@ const Checkout: React.FC<RouteComponentProps> = ({ history }) => {
               value={orderDetails.notes}
               onChange={handleFormValueChange}
             />
+            <div className="col-sm-3 col-10 checkout--field__error"></div>
           </div>
           <br />
           <div className="row justify-content-center">
-            <div className="col-sm-2 col-10"></div>
+            <div className="col-sm-4 col-10"></div>
             <div className="col-sm-4 col-10 checkout--orderBtn__wrapper">
               <button
                 className="btn btn-primary"
@@ -167,6 +209,7 @@ const Checkout: React.FC<RouteComponentProps> = ({ history }) => {
                 Order
               </button>
             </div>
+            <div className="col-sm-3 col-10 checkout--field__error"></div>
           </div>
         </form>
       </>
