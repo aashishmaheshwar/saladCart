@@ -35,12 +35,10 @@ const Checkout: React.FC<RouteComponentProps> = ({ history }) => {
   }, []);
 
   const goToHome = () => {
-    // if (ordered) {
     dispatch({
       type: "CLEAR_CART",
     });
     history.push("/home");
-    // }
   };
 
   const handleSubmit = (e: FormEvent) => {
@@ -51,24 +49,32 @@ const Checkout: React.FC<RouteComponentProps> = ({ history }) => {
 
   const handleFormValueChange = (e: ChangeEvent) => {
     const { name, value } = e.target as any;
+    if ((e.target as any).validity.valid) {
+      (e.target as any).classList.remove("border", "border-danger");
+    }
     setOrderDetails((oldState) => ({
       ...oldState,
       [name]: value,
     }));
   };
 
-  // const checkValidity = (e: FocusEvent<HTMLInputElement>) => {
-  //   const { name } = e.target as any;
-  //   // formRef.current?.checkValidity();
-  //   // if (name === "email") {
-  //   //   // emailRef.current?.checkValidity();
-  //   //   if (!emailRef.current?.validity.valid)
-  //   //     emailRef.current?.setCustomValidity("Enter a valid email address");
-  //   // } else {
-  //   //   if (!emailRef.current?.validity.valid)
-  //   //     nameRef.current?.setCustomValidity("Name cannot be left blank");
-  //   // }
-  // };
+  const checkValidity = (e: FocusEvent<HTMLInputElement>) => {
+    const { name } = e.target as any;
+    if (!e.target.validity.valid) {
+      e.target.classList.add("border", "border-danger");
+    } else {
+      e.target.classList.remove("border", "border-danger");
+    }
+    // formRef.current?.checkValidity();
+    // if (name === "email") {
+    //   // emailRef.current?.checkValidity();
+    //   if (!emailRef.current?.validity.valid)
+    //     emailRef.current?.setCustomValidity("Enter a valid email address");
+    // } else {
+    //   if (!emailRef.current?.validity.valid)
+    //     nameRef.current?.setCustomValidity("Name cannot be left blank");
+    // }
+  };
 
   const buildModal = () => {
     return (
@@ -102,7 +108,7 @@ const Checkout: React.FC<RouteComponentProps> = ({ history }) => {
         <form onSubmit={handleSubmit}>
           <div className="row justify-content-center">
             <label className="col-sm-2 col-10 checkout--field__label">
-              Name*
+              Name<span className="checkout__required">*</span>
             </label>
             <input
               // ref={nameRef}
@@ -113,13 +119,13 @@ const Checkout: React.FC<RouteComponentProps> = ({ history }) => {
               aria-label="Enter the name"
               value={orderDetails.name}
               onChange={handleFormValueChange}
-              // onBlur={checkValidity}
+              onBlur={checkValidity}
             />
           </div>
           <br />
           <div className="row justify-content-center">
             <label className="col-sm-2 col-10 checkout--field__label">
-              Email*
+              Email<span className="checkout__required">*</span>
             </label>
             <input
               // ref={emailRef}
@@ -131,7 +137,7 @@ const Checkout: React.FC<RouteComponentProps> = ({ history }) => {
               pattern={`^[a-zA-Z]+[a-zA-Z0-9._%+-]+@[a-zA-Z]+[a-zA-Z0-9.-]+\.[a-zA-Z]{2,3}$`}
               value={orderDetails.email}
               onChange={handleFormValueChange}
-              // onBlur={checkValidity}
+              onBlur={checkValidity}
             />
           </div>
           <br />
