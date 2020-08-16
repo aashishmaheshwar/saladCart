@@ -2,11 +2,12 @@ import React from "react";
 import { FaShoppingCart } from "react-icons/fa";
 import { useSelector, useDispatch } from "react-redux";
 import "./../css/MainNavigation.css";
-import { RouteComponentProps, withRouter } from "react-router-dom";
+import { RouteComponentProps, withRouter, useLocation } from "react-router-dom";
 
-const MainNavigation: React.FC<RouteComponentProps> = ({ location }) => {
+const MainNavigation = () => {
   const enableCheckout = useSelector((state) => (state as any).enableCheckout);
   const dispatch = useDispatch();
+  const location = useLocation();
 
   const checkout = () => {
     dispatch({ type: "CHECKOUT_TRIGGER" });
@@ -33,4 +34,4 @@ const MainNavigation: React.FC<RouteComponentProps> = ({ location }) => {
   );
 };
 
-export default withRouter(MainNavigation);
+export default MainNavigation;
