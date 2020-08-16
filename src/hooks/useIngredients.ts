@@ -104,6 +104,7 @@ export function useIngredients(defaultSelectedItems: Object | null = null) {
         });
       })
       .catch(() => {
+        setOptions(() => null as any);
         alert("Failed to fetch Ingredients. Try again later.");
       });
   }, []);

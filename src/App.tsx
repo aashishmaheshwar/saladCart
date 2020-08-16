@@ -1,7 +1,12 @@
 import React, { Suspense } from "react";
 // import logo from './logo.svg';
 import "./App.css";
-import { BrowserRouter as Router, Switch, Route } from "react-router-dom";
+import {
+  BrowserRouter as Router,
+  Switch,
+  Route,
+  Redirect,
+} from "react-router-dom";
 import Home from "./components/Home";
 import MainNavigation from "./components/MainNavigation";
 
@@ -22,7 +27,10 @@ function App() {
               <Route path="/home" exact component={Home} />
               <Route path="/ingredients" exact component={Ingredients} />
               <Route path="/checkout" exact component={Checkout} />
-              <Route path="/" exact component={Home} />
+              <Route path="**" exact>
+                <Redirect to="/home" />
+              </Route>
+              {/* component={Home} /> */}
             </Switch>
           </Suspense>
         </main>
