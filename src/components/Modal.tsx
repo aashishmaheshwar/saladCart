@@ -16,21 +16,16 @@ const Modal: React.FC<{
       <div className="modal__overlay" />
       <div className="modal__main">
         <div>
-          <h3 style={{ display: "inline-block", float: "left", color: "red" }}>
-            {title}
-          </h3>
+          <h3 className="modal__heading">{title}</h3>
           <button
             onClick={onClose}
-            style={{ float: "right" }}
-            className="btn btn-light btn-sm"
+            className="btn btn-light btn-sm float-right"
           >
             <FaWindowClose />
           </button>
         </div>
         <br />
-        <section style={{ overflowY: "scroll", overflowX: "hidden" }}>
-          {children}
-        </section>
+        <section className="modal__body">{children}</section>
       </div>
     </>,
     document.querySelector("#portal") as Element

@@ -27,7 +27,7 @@ const CartSummary: React.FC<{
     <div>
       <h4>Order Summary</h4>
       <br />
-      <section className="row justify-content-center">
+      <section className="row justify-content-center table-responsive">
         <table className="col-sm-7 table table-striped">
           <thead>
             <tr>

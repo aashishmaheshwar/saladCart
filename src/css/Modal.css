@@ -12,10 +12,26 @@
   flex-direction: column;
 }
 
+.modal__heading {
+  display: inline-block;
+  color: red;
+}
+
+.modal__body {
+  overflow-y: scroll;
+  overflow-x: hidden;
+}
+
 @media screen and (max-width: 825px) {
   .modal__main {
     width: 80%;
     padding: 15px;
+  }
+}
+
+@media screen and (max-width: 575px) {
+  .modal__body {
+    overflow-x: scroll;
   }
 }
 
