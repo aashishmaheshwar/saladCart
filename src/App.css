@@ -24,6 +24,7 @@
   /* background-color: aquamarine; */
   background: url("/images/Salad.jpg");
   background-position-y: bottom;
+  position: relative;
   /* z-index: 100; */
 }
 
@@ -34,6 +35,16 @@
 .App__content {
   top: 70px;
   position: absolute;
+  padding-bottom: 50px;
+}
+
+@media screen and (max-width: 420px) {
+  .App-Header__nav {
+    height: 120px;
+  }
+  .App__content {
+    top: 110px;
+  }
 }
 
 @media (prefers-reduced-motion: no-preference) {
