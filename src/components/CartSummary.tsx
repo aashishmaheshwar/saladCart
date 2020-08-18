@@ -27,7 +27,10 @@ const CartSummary: React.FC<{
     <div>
       <h4>Order Summary</h4>
       <br />
-      <section className="row justify-content-center table-responsive">
+      <section
+        className="row justify-content-center"
+        style={{ overflowX: "auto" }}
+      >
         <table className="col-sm-7 table table-striped">
           <thead>
             <tr>

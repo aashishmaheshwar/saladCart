@@ -2,7 +2,7 @@ import React from "react";
 import { FaShoppingCart } from "react-icons/fa";
 import { useSelector, useDispatch } from "react-redux";
 import "./../css/MainNavigation.css";
-import { RouteComponentProps, withRouter, useLocation } from "react-router-dom";
+import { useLocation } from "react-router-dom";
 
 const MainNavigation = () => {
   const enableCheckout = useSelector((state) => (state as any).enableCheckout);
