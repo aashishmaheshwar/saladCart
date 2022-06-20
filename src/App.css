@@ -3,11 +3,6 @@
   position: relative;
 }
 
-.App-logo {
-  height: 40vmin;
-  pointer-events: none;
-}
-
 .App-Header__container {
   width: 100%;
   height: 100px;
@@ -24,7 +19,9 @@
   /* background-color: aquamarine; */
   background: url("/images/Salad.jpg");
   background-position-y: bottom;
+  position: relative;
   /* z-index: 100; */
+  filter: drop-shadow(2px 4px 6px black);
 }
 
 .App-Header__nav > div {
@@ -34,34 +31,14 @@
 .App__content {
   top: 70px;
   position: absolute;
+  padding-bottom: 50px;
 }
 
-@media (prefers-reduced-motion: no-preference) {
-  .App-logo {
-    animation: App-logo-spin infinite 20s linear;
+@media screen and (max-width: 420px) {
+  .App-Header__nav {
+    height: 120px;
   }
-}
-
-.App-header {
-  background-color: #282c34;
-  min-height: 100vh;
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  justify-content: center;
-  font-size: calc(10px + 2vmin);
-  color: white;
-}
-
-.App-link {
-  color: #61dafb;
-}
-
-@keyframes App-logo-spin {
-  from {
-    transform: rotate(0deg);
-  }
-  to {
-    transform: rotate(360deg);
+  .App__content {
+    top: 110px;
   }
 }

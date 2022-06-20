@@ -30,6 +30,12 @@ const Ingredients: React.FC<RouteComponentProps> = ({ history }) => {
     dispatch({ type: "ENABLE_CHECKOUT", payload: { enableCheckout } });
   }, [enableCheckout]);
 
+  useEffect(() => {
+    if (!options) {
+      history.push("/home");
+    }
+  }, [options]);
+
   const handleInputValueChange = ({ target: { name, value } }: any) => {
     (updateIngredientCount as any)(name, value);
   };
@@ -46,18 +52,20 @@ const Ingredients: React.FC<RouteComponentProps> = ({ history }) => {
   };
 
   const buildItemDetailView = ({ name, price }: Ingredient) => {
+    const incrementBtnName = `Add ${name}`;
+    const decrementBtnName = `Remove ${name}`;
+    const increment = () =>
+      (updateIngredientCount as any)(name, (selectedItems as any)[name] + 1);
+    const decrement = () =>
+      (updateIngredientCount as any)(name, (selectedItems as any)[name] - 1);
     return (
       <section className="ingredient--itemdetail__mainwrapper">
         <div>MRP: Rs {price}</div>
         <div className="ingredient--itemdetail__countwrapper">
           <button
             className="btn btn-link btn-sm"
-            onClick={() =>
-              (updateIngredientCount as any)(
-                name,
-                (selectedItems as any)[name] + 1
-              )
-            }
+            aria-label={incrementBtnName}
+            onClick={increment}
           >
             <FaPlusCircle />
           </button>
@@ -70,12 +78,8 @@ const Ingredients: React.FC<RouteComponentProps> = ({ history }) => {
           />
           <button
             className="btn btn-link btn-sm"
-            onClick={() =>
-              (updateIngredientCount as any)(
-                name,
-                (selectedItems as any)[name] - 1
-              )
-            }
+            aria-label={decrementBtnName}
+            onClick={decrement}
           >
             <FaMinusCircle />
           </button>
